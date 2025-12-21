@@ -11,7 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        $usersSeedValue = [
+            [
+            'name' => 'Ehfaz Adnan',
+            'email' => 'ehfazadnan.cse@gmail.com',
+            'password' => bcrypt('password'),
+            'created_at' => now()
+            ]
+        ];
+
+        DB::table('users')->insert($usersSeedValue);
     }
 
     /**
