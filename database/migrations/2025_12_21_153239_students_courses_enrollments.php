@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('students_courses_enrollments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained('students');
-            $table->foreignId('course_id')->constrained('courses');
-            $table->foreignId('enrolled_by_user_id')->constrained('users');
+            $table->foreignId('students_id')->constrained('students');
+            $table->foreignId('courses_id')->constrained('courses');
+            $table->foreignId('enrolled_by_users_id')->constrained('users');
             $table->softDeletes();
             $table->timestamps();
         });
