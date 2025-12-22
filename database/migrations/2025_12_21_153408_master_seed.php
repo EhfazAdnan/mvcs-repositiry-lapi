@@ -7,11 +7,18 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Seed values for the users table.
+     *
+     * @var array
      */
-    public function up(): void
+    private array $usersSeedValue = [];
+
+    /**
+     * Constructor to initialize seed values.
+     */
+    public function __construct()
     {
-        $usersSeedValue = [
+        $this->usersSeedValue = [
             [
             'name' => 'Ehfaz Adnan',
             'email' => 'ehfazadnan.cse@gmail.com',
@@ -19,8 +26,14 @@ return new class extends Migration
             'created_at' => now()
             ]
         ];
+    }
 
-        DB::table('users')->insert($usersSeedValue);
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        DB::table('users')->insert($this->usersSeedValue);
     }
 
     /**
@@ -28,6 +41,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        DB::table('users')->whereIn(
+            'email',
+            array_map(
+                fn($user) => $user['email'], $this->usersSeedValue)
+        )->delete();
     }
 };
