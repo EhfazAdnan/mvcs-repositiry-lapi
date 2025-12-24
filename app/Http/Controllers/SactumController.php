@@ -10,6 +10,6 @@ class SactumController extends Controller
 {
     public function issueToken(Request $request) : Response
     {
-        return new Response();
+        return new Response('Hi');
     }
 }
